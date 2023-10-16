@@ -1,0 +1,27 @@
+1.Find all the countries in region "Asia";
+
+= db_name.collection_name.find({region:"Asia"}).pretty()
+
+
+2.Find all the countries with currency: "EUR"
+
+= db_name.collection_name.find({currency:"EUR"})
+
+3.Find all the countries whose timezone's gmtOffset is 3600
+
+= db_name.collection_name.find({timezone.gmtOffset:3600}).pretty()
+
+4.Find all the countries whose timezone's gmtOffset is 3600 AND timezone name is Central European Time (or CET)
+
+db_name.collection_name.find({timezone:{$elemMatch:{gmtOffset:3600, name: Central European Time}}})
+
+
+5.Find All the countries with more than 1 time zone (hint: size of array);
+
+// suppose we want to exclude somthign then 
+db_name.collection_name.fin({$where:"this.timezone.length>1},{_id:0 ,name:1}) // here in this query name will be included and id will be excluded
+
+
+6.Find All the countries with "Korean" translation (KR)
+
+db_name.collection_name.find({"translation.KR":{$exist:true}}, {city:1,name:0}) // here in this query city will be included but name will not
