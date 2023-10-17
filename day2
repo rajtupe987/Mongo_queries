@@ -1,0 +1,23 @@
+db.myCollection.insertOne({ name: "John", age: 30, city: "New York" });
+db.myCollection.find({});
+db.myCollection.updateOne({ name: "John" }, { $set: { age: 31 } });
+db.myCollection.deleteOne({ name: "John" });
+db.myCollection.find({ age: { $gte: 30 } });
+
+
+
+//  writing a quary where status is active
+db.myCollection.find({status:"active"})
+
+// writing a quary where stutus is active or pending
+db.myCollection.find({$or:[{status:"active"},{status:"pending"}]})
+
+// Retrieve documents where the "address.city" field is equal to "New York."
+db.myCollection.find({"address.city":"New York"})
+
+
+// write a quary which will sort asc or desc
+db.myCollection.find({}).sort({age:1}) // if i do 0 it will be desc in order
+
+// Retrieve the first 5 documents, skipping the first 2 documents in the collection.
+db.myCollection.find({}).skip(2).limit(5)
